@@ -24,5 +24,5 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/palomodigital/olhos-da-equipe:latest
-            ghcr.io/palomodigital/olhos-da-equipe:${{ github.sha }}
+            ghcr.io/palomodigital/palomo-vision:latest
+            ghcr.io/palomodigital/palomo-vision:${{ github.sha }}

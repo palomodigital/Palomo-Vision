@@ -3,7 +3,7 @@ version: "3.7"
 # Stack do Portainer. CLICKUP_TOKEN e PAINEL_PASS são definidos nas variáveis de ambiente da stack, nunca aqui.
 services:
   app:
-    image: ghcr.io/palomodigital/olhos-da-equipe:latest
+    image: ghcr.io/palomodigital/palomo-vision:latest
     networks:
       - PalomoRede
     environment:
