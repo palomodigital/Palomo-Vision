@@ -1,0 +1,37 @@
+version: "3.7"
+
+# Stack do Portainer. CLICKUP_TOKEN e PAINEL_PASS são definidos nas variáveis de ambiente da stack, nunca aqui.
+services:
+  app:
+    image: ghcr.io/palomodigital/olhos-da-equipe:latest
+    networks:
+      - PalomoRede
+    environment:
+      PORT: "3000"
+      CLICKUP_TOKEN: ${CLICKUP_TOKEN}
+      PAINEL_USER: "Palomo"
+      PAINEL_PASS: ${PAINEL_PASS}
+      REFRESH_MIN: "5"
+      DAYS: "180"
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.olhos.rule=Host(`olhos.palomodigital.com.br`)
+        - traefik.http.routers.olhos.entrypoints=websecure
+        - traefik.http.routers.olhos.tls.certresolver=letsencryptresolver
+        - traefik.http.services.olhos.loadbalancer.server.port=3000
+        - traefik.http.services.olhos.loadbalancer.passHostHeader=1
+
+networks:
+  PalomoRede:
+    external: true
+    name: PalomoRede

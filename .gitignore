@@ -1,0 +1,7 @@
+# dados extraídos do ClickUp (clientes, equipe): nunca no git
+data.json
+data.js
+# segredos
+.env
+*.token
+node_modules/
