@@ -32,6 +32,14 @@ export const CONFIG = {
   CRM_LIST: '901311632406',       // Comercial > CRM > Clientes Ativos: FONTE OFICIAL da lista de clientes   // Agendamentos & Publicações: conteúdo pronto -> agendado -> postado
   CAPTACAO_LIST: '901311449594',
   CAPTACAO_TAG: 'captação',
+  PAGES_LIST: '901323623330',      // Marketing > Desenvolvimento Web > Landing Pages/Site
+  // status da lista de páginas -> etapa do painel. "complete" NÃO é página no ar (decisão de 24/11/2026):
+  // página no ar tem o status próprio "ativo". Status desconhecido vira "outro" e aparece com o nome original.
+  PAGE_STAGE: {
+    'pendente': 'fila', 'briefing': 'briefing', 'em desenvolvimento': 'dev', 'revisao interna': 'revisao',
+    'aguardando cliente': 'cliente', 'alteracoes e ajustes': 'ajustes', 'alteracos e ajustes': 'ajustes',
+    'ativo': 'ativo', 'pausado': 'pausado', 'complete': 'concluido', 'concluido': 'concluido',
+  },
   // tipos de tarefa (custom_item_id) -> tipo
   KIND_BY_ITEM_ID: { 1026: 'Design', 1027: 'Vídeo' },
   FIELD: {
@@ -44,7 +52,8 @@ export const CONFIG = {
     published: 'Data da Publicação',   // preenchida quando a peça vai para "postado"
     social: 'Social Media',
     channels: 'Canais de Publicação',
-    postUrl: 'URL 1',                   // link do post no Instagram etc.
+    postUrl: 'URL 1',                   // link do post no Instagram etc. (nas páginas: endereço da página no ar)
+    pageType: 'Tipo de LP',
   },
   // nomes diferentes para a mesma pessoa (campo "Editor Externo" x usuário do ClickUp)
   ALIASES: { Coutinho: 'Gabriel Coutinho' },
@@ -270,16 +279,49 @@ export function isCaptacao(task, cfg = CONFIG) {
   return tags.includes(cfg.CAPTACAO_TAG) || /capta[cç][aã]o/i.test(String(task.name || ''));
 }
 
+// Página (landing page / site). sinceMs = quando entrou na etapa atual: histórico de status do ClickUp
+// (cfg.pageSince) ou, sem ele, a última atualização da tarefa.
+export function toPage(task, cfg = CONFIG) {
+  const status = task.status?.status || '';
+  const stage = cfg.PAGE_STAGE[norm(status)] || (task.status?.type === 'closed' ? 'concluido' : 'outro');
+  const rawUrl = fieldValue(getField(task, cfg.FIELD.postUrl));
+  const liveUrl = typeof rawUrl === 'string' && rawUrl.trim() ? rawUrl.trim() : null;
+  let domain = '';
+  if (liveUrl) { try { domain = new URL(/^https?:/i.test(liveUrl) ? liveUrl : 'https://' + liveUrl).hostname.replace(/^www\./, ''); } catch {} }
+  const type = fieldValue(getField(task, cfg.FIELD.pageType));
+  const hist = cfg.pageSince?.get(task.id);
+  return {
+    id: task.id,
+    name: task.name,
+    url: task.url,
+    client: clientOf(task, cfg),
+    type: Array.isArray(type) ? type.join(', ') : '',
+    status, statusType: task.status?.type || '', stage,
+    assignees: (Array.isArray(task.assignees) ? task.assignees : []).map((a) => personName(a?.username, cfg)),
+    domain, liveUrl,
+    dueMs: num(task.due_date),
+    createdMs: num(task.date_created),
+    updatedMs: num(task.date_updated),
+    sinceMs: hist ?? num(task.date_updated),
+    sinceFrom: hist ? 'historico' : 'atualizacao',
+    // data no ar: campo Data da Publicação; vazio (o normal em 24/11/2026) -> quando a tarefa foi para "ativo" (date_done)
+    liveMs: stage === 'ativo' ? (fieldValue(getField(task, cfg.FIELD.published)) ?? num(task.date_done)) : fieldValue(getField(task, cfg.FIELD.published)),
+    liveFrom: fieldValue(getField(task, cfg.FIELD.published)) ? 'campo' : stage === 'ativo' && num(task.date_done) ? 'status' : null,
+  };
+}
+
 export function transform(tasks, { cutoffMs, nowMs = Date.now() }, cfg = CONFIG) {
   const byId = new Map();
   for (const t of tasks) byId.set(t.id, t); // sem duplicatas
   const clients = [...byId.values()].filter((t) => t.list?.id === cfg.CRM_LIST).map((t) => toClient(t, cfg));
   cfg = { ...cfg, matcher: makeMatcher(clients.map((c) => c.name), cfg.CLIENT_ALIASES) };
-  const production = [], stories = [], captacoes = [], publications = [], skipped = [];
+  const production = [], stories = [], captacoes = [], publications = [], pages = [], skipped = [];
   for (const t of byId.values()) {
    try {
     const listId = t.list?.id;
-    if (listId === cfg.STORY_LIST) {
+    if (listId === cfg.PAGES_LIST) {
+      pages.push(toPage(t, cfg));   // todas: as abertas mostram a fila, as no ar o histórico de entregas
+    } else if (listId === cfg.STORY_LIST) {
       const s = toStory(t, cfg);
       if (s.dateMs && s.dateMs >= cutoffMs) stories.push(s);
     } else if (listId === cfg.CAPTACAO_LIST) {
@@ -313,9 +355,10 @@ export function transform(tasks, { cutoffMs, nowMs = Date.now() }, cfg = CONFIG)
       dono: 'Designer / Editor de Vídeo (campo); se vazio, Editor Externo; se vazio, responsável da tarefa',
       clientes: 'Comercial › CRM › Clientes Ativos (um cliente novo aparece assim que é criado lá)',
       captacao: 'Tarefas com tag "captação" na lista Agenda comercial; data = início/prazo',
+      paginas: 'Lista Landing Pages/Site: no ar = status “ativo” (complete não conta); data no ar = campo Data da Publicação ou, vazio, o dia em que a tarefa foi para “ativo”; endereço = URL 1',
       publicacao: 'Lista Agendamentos & Publicações: publicado = status postado/complete, data = campo Data da Publicação; no prazo = publicado até o dia do prazo',
     },
-    production, stories, captacoes, publications, clients,
+    production, stories, captacoes, publications, pages, clients,
     skipped: skipped.slice(0, 50),
   };
 }
@@ -367,6 +410,24 @@ export function approvalFromHistory(entry, cfg = CONFIG) {
   }
   return null;
 }
+// Quando a tarefa entrou no status atual (histórico em lote). Sem o ClickApp, devolve vazio e o painel usa a última atualização.
+export function sinceFromHistory(entry) {
+  return num(entry?.current_status?.total_time?.since ?? entry?.current_status?.since) || null;
+}
+async function fetchCurrentSince(token, ids, log) {
+  const out = new Map();
+  for (let i = 0; i < ids.length; i += 100) {
+    try {
+      const r = await api(token, '/task/bulk_time_in_status/task_ids', { task_ids: ids.slice(i, i + 100) });
+      for (const [id, entry] of Object.entries(r || {})) { const ms = sinceFromHistory(entry); if (ms) out.set(id, ms); }
+    } catch (e) {
+      log(`Histórico de status das páginas indisponível (${String(e.message).slice(0, 90)}). Usando a última atualização.`);
+      return out;
+    }
+    await sleep(500);
+  }
+  return out;
+}
 async function fetchApprovalHistory(token, cfg, ids, log) {
   const out = new Map();
   for (let i = 0; i < ids.length; i += 100) {
@@ -393,12 +454,15 @@ export async function extract({ token, days = 180, cfg = CONFIG, log = () => {} 
   const open = await fetchTasks(token, cfg, cfg.PRODUCTION_LIST_IDS, { include_closed: false });
   const meetings = await fetchTasks(token, cfg, [cfg.CAPTACAO_LIST]);
   const crm = await fetchTasks(token, cfg, [cfg.CRM_LIST]);
-  const all = [...recent, ...open, ...meetings, ...crm];
+  const pageTasks = await fetchTasks(token, cfg, [cfg.PAGES_LIST]);
+  const all = [...recent, ...open, ...meetings, ...crm, ...pageTasks];
   // histórico só para peças de produção/publicação já aprovadas (o resto ainda não passou por "aprovado")
   const ids = [...new Set(all.filter((t) => cfg.LISTS[t.list?.id] && (t.list.id === cfg.PUBLISH_LIST || ['done', 'closed'].includes(t.status?.type))).map((t) => t.id))];
   log(`Lendo histórico de status de ${ids.length} tarefas…`);
   const approvedAt = await fetchApprovalHistory(token, cfg, ids, log);
-  return transform(all, { cutoffMs, nowMs }, { ...cfg, approvedAt });
+  const openPages = pageTasks.filter((t) => !['done', 'closed'].includes(t.status?.type)).map((t) => t.id);
+  const pageSince = await fetchCurrentSince(token, openPages, log);
+  return transform(all, { cutoffMs, nowMs }, { ...cfg, approvedAt, pageSince });
 }
 
 export function saveData(data, out = 'data.json') {

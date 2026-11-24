@@ -162,3 +162,31 @@ assert.deepEqual(X.x1.externals,['Luka']); assert.deepEqual(X.x1.owners,['Lailla
 assert.deepEqual(X.x2.externals,['Gabriel Coutinho','Izaias']); assert.deepEqual(X.x2.owners,['Gabriel Coutinho','Izaias']); assert.equal(X.x2.ownerSource,'externo');
 assert.deepEqual(X.x3.externals,[]);
 console.log('externos: testes passaram');
+
+// ---------- páginas (Landing Pages/Site) ----------
+{
+  const PL = CONFIG.PAGES_LIST;
+  const tipo = cf('Tipo de LP','labels',['t1'],{options:[{id:'t1',label:'Vendas'}]});
+  const pg = [
+    mk({id:'p1',name:'[DG] LP Vendas',list:PL,status:'ativo',st:'done',cf:[tipo,cliente('Dr. Gustavo'),cf('URL 1','url','https://www.drgustavo.com.br/lp'),cf('Data da Publicação','date',String(now-5*D))]}),
+    mk({id:'p2',name:'[DM] LP Antiga',list:PL,status:'complete',st:'closed'}),
+    mk({id:'p3',name:'[IM] LP Nova',list:PL,status:'alteraçõs e ajustes',st:'custom',due:now-2*D,upd:now-9*D}),
+    mk({id:'p5',name:'[DG] LP Sem data',list:PL,status:'ativo',st:'done',done:now-7*D}),
+    mk({id:'p4',name:'[UP] LP Estranha',list:PL,status:'status novo',st:'custom'}),
+  ];
+  const since = new Map([['p3', now-4*D]]);
+  const rp = transform(pg,{cutoffMs:cutoff,nowMs:now},{...CONFIG,pageSince:since});
+  const G = Object.fromEntries(rp.pages.map(p=>[p.id,p]));
+  assert.equal(rp.pages.length, 5);
+  assert.equal(G.p5.liveMs, now-7*D); assert.equal(G.p5.liveFrom,'status');
+  assert.equal(G.p1.stage,'ativo'); assert.equal(G.p1.domain,'drgustavo.com.br'); assert.equal(G.p1.type,'Vendas');
+  assert.equal(G.p1.liveMs, now-5*D); assert.equal(G.p1.liveUrl,'https://www.drgustavo.com.br/lp'); assert.equal(G.p1.client,'Dr. Gustavo');
+  assert.equal(G.p1.liveFrom,'campo');
+  assert.equal(G.p2.stage,'concluido');                   // complete NÃO é página no ar
+  assert.equal(G.p3.stage,'ajustes');                     // grafia do ClickUp sem o "e"
+  assert.equal(G.p3.sinceMs, now-4*D); assert.equal(G.p3.sinceFrom,'historico');
+  assert.equal(G.p4.stage,'outro'); assert.equal(G.p4.sinceFrom,'atualizacao');
+  assert.equal(G.p4.client,'Unipeças');                   // cliente pelo prefixo
+  assert.equal(rp.production.length, 0);                  // páginas não viram produção
+  console.log('páginas: testes passaram');
+}
