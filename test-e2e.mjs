@@ -76,7 +76,7 @@ const raw = (line)=>new Promise((res)=>{ const c=net.connect(PORT,'127.0.0.1',()
 assert.match(await raw('//'),/ 400 /); assert.match(await raw('/\\'),/ 400 /);
 assert.equal((await get('/status',true)).status,200);   // continua vivo
 const j = await (await get('/data.json',true)).json(); assert.equal(j.production.length,231);
-const html = await (await get('/',true)).text(); assert.ok(html.includes('Olhos da Equipe'));
+const html = await (await get('/',true)).text(); assert.ok(html.includes('Palomo Vision'));
 const st = await (await get('/status',true)).json(); assert.equal(st.ok,true);
 console.log('servidor ok: 401 sem senha, 200 com senha, /status ok');
 srv.kill(); api.close();
