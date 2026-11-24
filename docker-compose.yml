@@ -24,7 +24,7 @@ services:
           memory: 256M
       labels:
         - traefik.enable=true
-        - traefik.http.routers.olhos.rule=Host(`olhos.palomodigital.com.br`)
+        - traefik.http.routers.olhos.rule=Host(`vision.palomodigital.com.br`) || Host(`olhos.palomodigital.com.br`)
         - traefik.http.routers.olhos.entrypoints=websecure
         - traefik.http.routers.olhos.tls.certresolver=letsencryptresolver
         - traefik.http.services.olhos.loadbalancer.server.port=3000
