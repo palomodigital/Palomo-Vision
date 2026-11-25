@@ -441,6 +441,76 @@ td a:not([style]):hover,.dm a:hover,.alert a:hover,.note a:hover{color:var(--min
 .ddi.sel .ddk{opacity:1}
 .dde{padding:12px;text-align:center;font-size:13px;color:var(--muted)}
 .dde[hidden]{display:none}
+
+/* stories: grade de constância */
+.lgd{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--muted);align-items:center}
+.lgd span{display:inline-flex;align-items:center;gap:6px}
+.lgd .sc{width:11px;height:11px}
+.sg-wrap{overflow-x:auto;margin:0 -4px;padding:2px 4px 4px}
+.sg{min-width:640px;display:grid;gap:3px}
+.sg-h,.sg-row{display:grid;grid-template-columns:minmax(120px,170px) minmax(0,1fr) 56px 76px;gap:0 14px;align-items:center}
+.sg-h{margin-bottom:2px}
+.sg-cells{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:3px}
+.sg-cells.dense{gap:2px}
+.sh-d{font-size:10.5px;color:var(--muted);text-align:center;line-height:1;overflow:visible;white-space:nowrap;font-variant-numeric:tabular-nums}
+.sh-d.we{opacity:.55}.sh-d.now{color:var(--mint);font-weight:700}
+.sg-r{font-size:12.5px;color:var(--ink2);text-align:right;font-variant-numeric:tabular-nums}
+.sg-h .sg-r{color:var(--muted);font-size:12px}
+.sg-r em{font-style:normal;color:var(--muted)}
+.sg-r.rate{font-weight:620}.rate.good{color:var(--ok)}.rate.mid{color:var(--warn)}.rate.low{color:var(--bad)}
+.sg-n{background:none;border:0;padding:6px 0;font:inherit;font-size:13.5px;font-weight:560;color:var(--ink);text-align:left;cursor:pointer;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sg-n:hover{color:var(--mint)}
+.sg-row{padding:2px 0;border-radius:8px}
+.sg-row:hover{background:color-mix(in srgb,var(--ink) 3%,transparent)}
+.sc{display:block;aspect-ratio:1/1;min-height:14px;max-height:26px;border-radius:5px;background:var(--panel2);transition:transform .12s}
+.dense .sc{border-radius:3px;min-height:12px}
+.lgd .sc{aspect-ratio:auto;min-height:0;max-height:none;display:inline-block}
+.sc.ok{background:var(--s3)}
+.sc.miss{background:var(--bad)}
+.sc.today{background:transparent;box-shadow:inset 0 0 0 1.5px var(--s3);border-radius:5px}
+.sc.next{background:transparent;box-shadow:inset 0 0 0 1px var(--line2)}
+.sc.none{background:color-mix(in srgb,var(--ink) 6%,transparent)}
+.sc.we{background:transparent;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--line) 70%,transparent);opacity:.7}
+.sc[data-dr]{cursor:pointer}.sc[data-dr]:hover{transform:scale(1.18);position:relative;z-index:1}
+.sc.now{outline:1.5px solid color-mix(in srgb,var(--ink) 55%,transparent);outline-offset:1.5px}
+/* ritmo por semana */
+.swk{display:flex;align-items:flex-end;gap:12px;height:230px;padding-top:6px}
+.swk-c{flex:1;min-width:0;display:grid;grid-template-rows:auto 1fr auto;gap:8px;height:100%;justify-items:center;text-align:center}
+.swk-c b{font:560 15px/1 var(--fd);font-stretch:90%}
+.swk-c small{font-size:11.5px;color:var(--muted)}
+.swk-b{width:100%;max-width:56px;background:var(--panel2);border-radius:10px 10px 4px 4px;display:flex;align-items:flex-end;overflow:hidden}
+.swk-b span{display:block;width:100%;border-radius:8px 8px 3px 3px;background:var(--s3);transition:filter .15s}
+.swk-c.mid .swk-b span{background:var(--warn)}.swk-c.low .swk-b span{background:var(--bad)}.swk-c.none .swk-b span{background:var(--line2)}
+.swk-c[data-dr]{cursor:pointer}.swk-c[data-dr]:hover .swk-b span{filter:brightness(1.15)}
+.swk-c.good b{color:var(--ink)}.swk-c.mid b{color:var(--warn)}.swk-c.low b{color:var(--bad)}.swk-c.none b{color:var(--muted)}
+/* falhas recentes */
+.mrow{display:flex;gap:14px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.mrow:last-of-type{border-bottom:0}
+.md{width:46px;flex:none;text-align:center;font:560 15px/1.1 var(--fd);padding:6px 0;border-radius:10px;background:color-mix(in srgb,var(--bad) 12%,transparent);color:var(--bad)}
+.md small{display:block;font:500 10.5px/1.2 var(--fb,inherit);margin-top:2px;opacity:.85}
+.mrow b{font-weight:560;font-size:13.5px}.mrow small{display:block;color:var(--muted);font-size:12.5px;margin-top:2px}
+.rbar{display:inline-block;vertical-align:middle;width:120px;height:6px;border-radius:99px;background:var(--panel2);overflow:hidden;margin-right:10px}
+.rbar span{display:block;height:100%;border-radius:99px;background:var(--s3)}.rbar span.mid{background:var(--warn)}.rbar span.low{background:var(--bad)}
+.rnum{font-style:normal;font-variant-numeric:tabular-nums;color:var(--ink2);font-size:13px}
+
+.colp{display:flex;flex-direction:column}
+.colp .swk{flex:1;min-height:200px;height:auto}
+.swk-c{height:auto;align-self:stretch}
+
+/* contrato do mês: resumo + tabela */
+.csum{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin:6px 24px 14px;border:1px solid var(--line);border-radius:14px;background:var(--panel);overflow:hidden}
+.csum>div{padding:14px 18px;border-left:1px solid var(--line)}.csum>div:first-child{border-left:0}
+.csum .l{font-size:12.5px;color:var(--muted)}.csum .v{font-size:30px;font-weight:650;letter-spacing:-.02em;line-height:1.15;margin-top:2px;font-variant-numeric:tabular-nums}
+.csum .f{font-size:12.5px;color:var(--muted);margin-top:2px}.csum .v small{font-size:15px;font-weight:550;color:var(--muted);margin-left:4px;letter-spacing:0}
+#contractTbl th.grp{text-align:center;border-bottom:0;padding-bottom:0}
+#contractTbl td.big{font-size:17px;font-weight:650;font-variant-numeric:tabular-nums;text-align:right}
+#contractTbl td.big.m{color:var(--muted);font-weight:550}
+#contractTbl td.sd{text-align:right;font-variant-numeric:tabular-nums;font-weight:650;font-size:15px}
+#contractTbl td.sd.neg{color:var(--bad)}#contractTbl td.sd.pos{color:var(--ok)}#contractTbl td.sd.zero{color:var(--muted);font-weight:500}
+#contractTbl tr.tot td{background:var(--panel2);font-weight:650;border-top:1px solid var(--line)}
+#contractTbl tr.tot td.big{font-size:17px}
+#contractTbl td.cl,#contractTbl th.cl{border-left:1px solid var(--line)}
+@media(max-width:700px){#contractTbl .role{display:none}.csum{grid-template-columns:1fr;margin:6px 14px 12px}.csum>div{border-left:0;border-top:1px solid var(--line);padding:10px 14px}.csum>div:first-child{border-top:0}}
 </style>
 </head>
 <body>
@@ -451,6 +521,7 @@ td a:not([style]):hover,.dm a:hover,.alert a:hover,.note a:hover{color:var(--min
     <nav id="nav">
       <a href="#visao" class="on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1.5" y="1.5" width="5" height="5" rx="1.2"/><rect x="9.5" y="1.5" width="5" height="5" rx="1.2"/><rect x="1.5" y="9.5" width="5" height="5" rx="1.2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1.2"/></svg>Visão geral</a>
       <a href="#publicacoes"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2L7 9M14 2l-4.5 12-2.5-5-5-2.5L14 2z"/></svg>Publicações</a>
+      <a href="#stories"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4.5" y="1.5" width="7" height="13" rx="2"/><circle cx="8" cy="6.2" r="1.6"/><path d="M5.8 10.8c.5-1 1.3-1.4 2.2-1.4s1.7.4 2.2 1.4"/></svg>Stories</a>
       <a href="#paginas"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1.5" y="2.5" width="13" height="11" rx="1.8"/><path d="M1.5 6h13M4 4.2h.01M6 4.2h.01"/></svg>Páginas</a>
       <a href="#equipe"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="5" r="2.5"/><path d="M1.5 14c.4-2.6 2.2-4 4.5-4s4.1 1.4 4.5 4"/><path d="M10.5 3a2.3 2.3 0 010 4.2M12 10.3c1.6.5 2.6 1.8 2.8 3.7"/></svg>Equipe</a>
       <a href="#clientes"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="12" height="9" rx="1.5"/><path d="M5.5 5V3.5A1.5 1.5 0 017 2h2a1.5 1.5 0 011.5 1.5V5"/></svg>Clientes</a>
@@ -536,6 +607,7 @@ td a:not([style]):hover,.dm a:hover,.alert a:hover,.note a:hover{color:var(--min
           </div>
           <div class="panel flat c12" id="pContract">
             <div class="pad" style="padding-bottom:6px"><div class="ph" style="margin:0"><div><h3>Contrato do mês</h3><p id="contractSub"></p></div><div class="legend" id="lgContract"></div></div></div>
+            <div class="csum" id="contractSum"></div>
             <div class="tw" id="contractTbl"></div>
           </div>
           <div class="panel flat c12">
@@ -551,6 +623,25 @@ td a:not([style]):hover,.dm a:hover,.alert a:hover,.note a:hover{color:var(--min
             <div class="tw" id="pubFormat"></div>
           </div>
         </div>
+      </section>
+
+      <section id="stories">
+        <div class="sh"><h2>Stories</h2><span>Constância dos stories por cliente: um por dia útil, vindo da lista de Stories do ClickUp. Cada quadrado é um dia.</span></div>
+        <div class="kpis" id="stKpis"></div>
+        <div class="panel pad" style="margin-bottom:20px">
+          <div class="ph"><div><h3>Constância por dia</h3><p id="stGridSub"></p></div>
+            <div class="lgd" aria-hidden="true"><span><i class="sc ok"></i>Postado</span><span><i class="sc miss"></i>Não postado</span><span><i class="sc today"></i>Hoje, ainda dá tempo</span><span><i class="sc none"></i>Sem story no dia</span></div></div>
+          <div class="sg-wrap"><div class="sg" id="stGrid"></div></div>
+        </div>
+        <div class="grid">
+          <div class="panel pad c8 colp"><div class="ph"><div><h3>Ritmo por semana</h3><p id="stWeekSub"></p></div></div><div class="swk" id="stWeeks"></div></div>
+          <div class="panel pad c4"><div class="ph"><div><h3>Falhas recentes</h3><p>Stories que passaram do dia sem postar</p></div></div><div id="stMiss"></div></div>
+          <div class="panel flat c12">
+            <div class="pad" style="padding-bottom:6px"><div class="ph" style="margin:0"><div><h3>Por responsável</h3><p>Quem postou e quem deixou passar, no período</p></div></div></div>
+            <div class="tw" id="stWho"></div>
+          </div>
+        </div>
+        <p class="note" id="stRule" style="margin-top:22px"></p>
       </section>
 
       <section id="paginas">
@@ -637,6 +728,10 @@ const weekStart = (ms) => { const d = new Date(ms); d.setHours(0,0,0,0); d.setDa
 const dayOf = (ms) => { const d = new Date(ms); d.setHours(0,0,0,0); return d.getTime(); };
 const isDone = (p) => ['done','closed'].includes(p.statusType);
 const isPosted = (s) => s.status === 'postado' || isDone(s);
+// Story: ok = postado; miss = o dia passou sem postar; today = é hoje e ainda não postou (ainda dá tempo); next = dia futuro.
+// "Conta" nas taxas só o que já venceu: quem ainda tem o dia de hoje não derruba a taxa de manhã.
+const storyState = (s, now) => isPosted(s) ? 'ok' : dayOf(s.dateMs) < dayOf(now) ? 'miss' : dayOf(s.dateMs) === dayOf(now) ? 'today' : 'next';
+const storyDue = (s, now) => { const k = storyState(s, now); return k === 'ok' || k === 'miss'; };
 const initials = (n) => n.replace(/[()]/g, '').split(/\s+/).filter(Boolean).slice(0, 2).map((x) => x[0]).join('').toUpperCase() || '?';
 const state = { per: 'mes', days: 30, attr: 'campo', client: '' };   // per: 'days' (últimos N dias) | 'mes' (mês atual, do dia 1 até hoje) | 'mesant' (mês passado inteiro)
 let RAW = null;
@@ -657,14 +752,13 @@ function makeDemo() {
     const t = wd(rnd() * SPAN);
     production.push({ id: 'd' + i, name: '[' + pick(['DG','MA','RD']) + '] Peça ' + i, url: '#', client: rnd() < .02 ? 'Sem cliente' : pick(clients), kind,
       format: kind === 'Vídeo' ? 'reels' : pick(['feed carrossel','feed estático','story estático']),
-      list: rnd() < .7 ? 'Agendamentos & Publicações' : kind === 'Design' ? 'Design' : 'Edição de Vídeo',
-      status: pick(['postado','agendado','complete']), statusType: pick(['done','closed','closed']),
+      list: kind === 'Design' ? 'Design' : 'Edição de Vídeo',
+      status: pick(['aprovado','aprovado','aprovado','conteúdo finalizado','complete']), statusType: 'done',
       owners, ownerSource: owners.length ? 'campo' : 'nenhum', externals: rnd() < .18 ? [pick(['Luka','Coutinho','Izaias'])] : [], assignees: [pick(['Lara','Eloiza','Lara'])],
       dueMs: t, deliveredMs: t, deliveredFrom: rnd() < .93 ? 'finalizacao' : 'fechamento', createdMs: t - 4 * D, updatedMs: t });
     const q = production[production.length - 1], aprAt = Math.min(now - 3600e3, t + (rnd() < .3 ? 0 : Math.ceil(rnd() * 4)) * D + 3 * 3600e3), r0 = rnd();
-    q.approved = true;
-    if (q.list === 'Agendamentos & Publicações') { q.approvedMs = r0 < .8 ? aprAt : null; q.approvedFrom = r0 < .8 ? 'historico' : null; }
-    else { q.approvedMs = aprAt; q.approvedFrom = r0 < .6 ? 'historico' : 'status'; }
+    q.approved = q.status === 'aprovado';
+    q.approvedMs = q.approved ? aprAt : null; q.approvedFrom = q.approved ? (r0 < .6 ? 'historico' : 'status') : null;
   }
   const etapas = ['em produção','em produção','em produção','p/ aprovação do cliente','p/ aprovação do cliente','p/ aprovação do cliente','revisado','alteração e reajustes'];
   for (let i = 0; i < 16; i++) {
@@ -680,7 +774,7 @@ function makeDemo() {
     captacoes.push({ id: 'c' + i, name: 'Captação ' + pick(clients), url: '#', client: pick(clients), status: 'concluído', atMs: wd(late), closedMs: null, assignees: rnd() < .35 ? [who, 'Andres'] : [who] });
   }
   for (let i = 0; i < 4; i++) captacoes.push({ id: 'cf' + i, name: 'Captação agendada', url: '#', client: pick(clients), status: 'para fazer', atMs: now + (i + 1) * D, closedMs: null, assignees: [pick(['Andres','Lara'])] });
-  for (let d = 0; d < SPAN; d++) for (const [cl, rate] of [['Dr. Gustavo', .9], ['Dr. Macário', .55], ['Mercantil Avenida', .85], ['RD Xavier', .92], ['Imagem +', .8]]) {
+  for (let d = 0; d < SPAN; d++) if ([0, 6].indexOf(new Date(now - d * D).getDay()) < 0) for (const [cl, rate] of [['Dr. Gustavo', .9], ['Dr. Macário', .55], ['Mercantil Avenida', .85], ['RD Xavier', .92], ['Imagem +', .8]]) {
     const ok = rnd() < rate;
     stories.push({ id: 's' + d + cl, client: cl, dateMs: wd(d), status: ok ? 'postado' : 'não postado', statusType: ok ? 'closed' : 'open', assignees: ['Eloiza'] });
   }
@@ -709,7 +803,7 @@ function makeDemo() {
   const registry = [['Dr. Gustavo','ativo','done','Domínio','Wellison Favonny',10],['Dr. Macário','ativo','done','Domínio','Wellison Favonny',12],['Mercantil Avenida','ativo','done','Domínio','Wellison Favonny',8],['RD Xavier','ativo','done','Domínio','Wellison Favonny',16],['Imagem +','ativo','done','Domínio','Wellison Favonny',10],['Dr. Fabio Lyra','ativo','done','Domínio','Wellison Favonny',null],['UniPeças','em cancelamento','done',null,null,null],['Vênus Clínica','ativo','done','Comando','Wellison Favonny',null],['Ponto Elétrico','ativo','done','Comando','Wellison Favonny',null]]
     .map(([name, status, statusType, plan, mgr, postsPerMonth], i) => ({ id: 'k' + i, name, url: '#', status, statusType, plan, postsPerMonth, managers: mgr ? [mgr] : [], niche: null, origin: null, sinceMs: now - 400 * D }));
   return { demo: true, generatedAt: new Date(now).toISOString(), windowStartMs: now - SPAN * D, production, captacoes, stories, publications, pages, clients: registry,
-    rules: { entrega: 'Data da Finalização (campo) ou, se vazia, data de fechamento da tarefa', aprovacao: 'dia em que a tarefa entrou no status “aprovado” (histórico do ClickUp); sem histórico, estimativa pelo status concluído', dono: 'Designer / Editor de Vídeo (campo); se vazio, Editor Externo; se vazio, responsável da tarefa' } };
+    rules: { entrega: 'Data da Finalização (campo) ou, se vazia, data de fechamento da tarefa', aprovacao: 'tarefas de Design e Edição de Vídeo que estão no status “aprovado”; a data é o dia em que entraram nele (histórico do ClickUp)', dono: 'Designer / Editor de Vídeo (campo); se vazio, Editor Externo; se vazio, responsável da tarefa' } };
 }
 
 /* ====================== cálculo ====================== */
@@ -754,7 +848,7 @@ function compute() {
     queue: prod.filter((p) => !isDone(p) && ['Design','Edição de Vídeo'].includes(p.list)),
     caps: RAW.captacoes.filter(okClient).filter((c) => capIn(c, start, capEnd)),
     prevCaps: covered ? RAW.captacoes.filter(okClient).filter((c) => capIn(c, prevStart, prevEnd)) : [],
-    stories: RAW.stories.filter(okClient).filter((s) => s.dateMs >= start && s.dateMs <= storyEnd),
+    stories: RAW.stories.filter(okClient).filter((s) => s.dateMs >= start && s.dateMs <= storyEnd && storyDue(s, now)),
     prevStories: covered ? RAW.stories.filter(okClient).filter((s) => s.dateMs >= prevStart && s.dateMs < prevEnd) : [],
     allCaps: RAW.captacoes.filter(okClient),
   };
@@ -782,7 +876,7 @@ function colsSVG(w, labels, series, keys) {
   const h = 285, m = { l: 30, r: 4, t: 12, b: 26 }, iw = w - m.l - m.r, ih = h - m.t - m.b;
   const totals = labels.map((_, i) => series.reduce((a, s) => a + s.values[i], 0));
   const { step, max } = niceScale(Math.max(...totals, 1));
-  const band = iw / labels.length, bw = Math.min(26, band * .5);
+  const band = iw / labels.length, bw = Math.min(44, band * .56);
   let g = '';
   for (let v = 0; v <= max; v += step) { const y = m.t + ih - ih * v / max; g += `<line class="grid" x1="${m.l}" x2="${w - m.r}" y1="${y}" y2="${y}" ${v === 0 ? '' : 'stroke-dasharray="2 4"'}/><text x="${m.l - 8}" y="${y + 3.5}" text-anchor="end">${v}</text>`; }
   labels.forEach((lb, i) => {
@@ -902,10 +996,11 @@ function render() {
   $('#capTbl').innerHTML = cpRows.length ? `<table><thead><tr><th>Pessoa</th><th class="n">Captações</th><th>Participação</th><th class="n">Última</th></tr></thead><tbody>${cpRows.map(([n, v]) => `<tr><td><div class="who"><span class="av">${esc(initials(n))}</span>${esc(n)}</div></td><td class="n">${v.n}</td><td style="width:38%"><div class="bar"><span style="width:${100 * v.n / cpMax}%;background:${C3}"></span></div></td><td class="n dim">${fmtDate(v.last)}</td></tr>`).join('')}</tbody></table><div style="padding:0 16px 12px" class="note">Cada responsável da captação conta 1 participação.</div>` : '<div class="empty">Sem captações no período</div>';
 
   renderPages(c);
+  renderStories(c);
   ddSyncAll();
   renderHealth(c);
   if (drillOpen) drawerFill();
-  $('#rule').innerHTML = `<b>Como os números são calculados.</b> Entrega = ${esc(RAW.rules?.entrega || 'Data da Finalização')}. Aprovação = ${esc(RAW.rules?.aprovacao || 'dia em que entrou em “aprovado”')}. Dono da peça = ${esc(RAW.rules?.dono || 'campos de produção')}. Uma peça com dois donos credita 1 a cada um, e os totais contam a peça uma vez. A comparação usa a janela imediatamente anterior, do mesmo tamanho.`;
+  $('#rule').innerHTML = `<b>Como os números são calculados.</b> Entrega = ${esc(RAW.rules?.entrega || 'Data da Finalização')}. Aprovação = tarefas de Design e Edição de Vídeo que estão no status “aprovado”, no dia em que entraram nele. Design e Vídeo = a lista de origem da tarefa. Dono da peça = ${esc(RAW.rules?.dono || 'campos de produção')}. Uma peça com dois donos credita 1 a cada um, e os totais contam a peça uma vez. A comparação usa a janela imediatamente anterior, do mesmo tamanho.`;
 }
 
 /* ---------- publicações ---------- */
@@ -939,7 +1034,7 @@ function drillRow(kind, x, o) {
   else if (kind === 'pub') { name = x.name; url = x.url; sub = [x.format, ...(x.channels || [])]; who = (x.socialMedia || []).join(', ') || (x.assignees || []).join(', '); st = x.stage === 'publicado' ? '<span class="tag ok">publicado</span> ' + prazoChip(x) : stChip(x.status, x.statusType); if (x.stage === 'publicado') stTxt = 'publicado' + (lateDays(x) > 0 ? ' (+' + lateDays(x) + 'd)' : ''); }
   else if (kind === 'cap') { name = x.name; url = x.url; who = (x.assignees || []).join(', '); st = stChip(x.status, x.statusType); }
   else if (kind === 'page') { name = x.name; url = x.url; sub = [x.type, x.domain]; who = (x.assignees || []).join(', '); st = pgChip(x); stTxt = PSTAGE_TXT(x); }
-  else { name = 'Story'; url = 'https://app.clickup.com/t/' + x.id; who = (x.assignees || []).join(', '); st = stChip(x.status, x.statusType); }
+  else { name = x.name || 'Story'; url = x.url || 'https://app.clickup.com/t/' + x.id; who = (x.assignees || []).join(', '); st = storyChip(x); }
   sub = sub.filter(Boolean);
   let dts = [];
   if (kind === 'prod') {
@@ -1062,20 +1157,34 @@ function renderContract(c) {
   const mes = new Date(m0).toLocaleDateString('pt-BR', { month: 'long' });
   const withN = rows.filter((r) => r.N), totN = withN.reduce((a, r) => a + r.N, 0), totP = withN.reduce((a, r) => a + r.pub, 0);
   $('#contractSub').textContent = `${mes} · ${closed ? 'mês fechado, ' + dim + ' dias' : 'dia ' + day + ' de ' + dim}` + (totN ? ` · ${withN.length} clientes com contrato · ${totP} de ${totN} posts publicados (${Math.round(100 * totP / totN)}%)` : '');
-  $('#lgContract').innerHTML = `<span><i style="background:${C3}"></i>Publicado</span><span><i style="background:${C3};opacity:.35"></i>A postar</span><span><i style="width:2px;height:11px;border-radius:0;vertical-align:-2px;background:var(--ink)"></i>${closed ? 'Contrato' : 'Esperado hoje'}</span>`;
-  if (!rows.length) { $('#contractTbl').innerHTML = (RAW.clients || []).length ? '<div class="empty">Nenhum cliente com “Quantidade de Postagens” no CRM</div>' : '<div class="empty">Estes dados não trazem o CRM. Rode o extrator atualizado.</div>'; return; }
+  $('#lgContract').innerHTML = `<span><i style="background:${C3}"></i>Saiu</span><span><i style="background:${C3};opacity:.35"></i>A postar</span><span><i style="width:2px;height:11px;border-radius:0;vertical-align:-2px;background:var(--ink)"></i>${closed ? 'Contrato' : 'Previsto hoje'}</span>`;
+  if (!rows.length) { $('#contractSum').innerHTML = ''; $('#contractTbl').innerHTML = (RAW.clients || []).length ? '<div class="empty">Nenhum cliente com “Quantidade de Postagens” no CRM</div>' : '<div class="empty">Estes dados não trazem o CRM. Rode o extrator atualizado.</div>'; return; }
+  const fmt1 = (n) => n.toFixed(1).replace('.', ',');
+  const exp = (r) => Math.round(r.E);                                  // "previsto até hoje", em posts inteiros
+  const totE = withN.reduce((a, r) => a + exp(r), 0), totT = withN.reduce((a, r) => a + r.todo, 0), totF = withN.reduce((a, r) => a + r.free, 0), totS = totP - totE;
+  const sd = (n) => n === 0 ? '0' : (n > 0 ? '+' : '−') + Math.abs(n);
+  const sdc = (n) => n < 0 ? 'neg' : n > 0 ? 'pos' : 'zero';
+  const nCli = (k) => withN.filter((r) => r.st === k).length, late = withN.filter((r) => r.st === 'late').reduce((a, r) => a + Math.max(0, exp(r) - r.pub), 0);
+  $('#contractSum').innerHTML = `<div><div class="l">Contrato no mês</div><div class="v">${totN}</div><div class="f">posts de ${withN.length} clientes</div></div>`
+    + `<div><div class="l">${closed ? 'Previsto no fechamento' : 'Previsto até hoje'}</div><div class="v">${totE}</div><div class="f">${closed ? 'mês fechado, ' + dim + ' dias' : 'dia ' + day + ' de ' + dim + ' · ' + Math.round(100 * day / dim) + '% do mês'}</div></div>`
+    + `<div><div class="l">Saiu</div><div class="v">${totP}</div><div class="f">${totN ? Math.round(100 * totP / totN) + '% do contrato' : ''}${nCli('late') ? ' · ' + nCli('late') + (nCli('late') > 1 ? ' clientes atrasados' : ' cliente atrasado') + ' (' + sd(-late) + ')' : ' · ninguém atrasado'}</div></div>`;
   const bar = (r) => {
     const pw = Math.min(100, 100 * r.pub / r.N), tw = Math.min(100 - pw, 100 * r.todo / r.N), ex = Math.min(100, 100 * r.E / r.N);
-    return `<div class="cbar" title="Publicado ${r.pub} · a postar ${r.todo} · esperado até hoje ${r.E.toFixed(1).replace('.', ',')} de ${r.N}">${pw ? `<span style="width:${pw}%;background:${C3}"></span>` : ''}${tw ? `<span style="width:${tw}%;background:${C3};opacity:.35"></span>` : ''}<i style="left:${ex}%"></i></div>`;
+    return `<div class="cbar" title="Saiu ${r.pub} · a postar ${r.todo} · previsto até hoje ${fmt1(r.E)} de ${r.N}">${pw ? `<span style="width:${pw}%;background:${C3}"></span>` : ''}${tw ? `<span style="width:${tw}%;background:${C3};opacity:.35"></span>` : ''}<i style="left:${ex}%"></i></div>`;
   };
-  const sit = (r) => r.st === 'ok' ? `<span class="tag ok">cumprido</span>${r.pub > r.N ? ` <span class="dim">+${r.pub - r.N}</span>` : ''}` : r.st === 'ontrack' ? '<span class="tag ok">em dia</span>' : r.st === 'late' ? `<span class="tag bad">atrasado</span> <span class="dim">−${Math.round(r.behind)}</span>` : '<span class="tag warn">definir no CRM</span>';
-  $('#contractTbl').innerHTML = `<table><thead><tr><th>Cliente</th><th class="n">Pub. / contrato</th><th>Progresso no mês</th><th class="n">A postar</th><th class="n">Sem previsão</th><th>Situação</th></tr></thead><tbody>${rows.map((r) => {
+  const sit = (r) => r.st === 'ok' ? '<span class="tag ok">cumprido</span>' : r.st === 'ontrack' ? '<span class="tag ok">em dia</span>' : r.st === 'late' ? '<span class="tag bad">atrasado</span>' : '<span class="tag warn">definir no CRM</span>';
+  const dash = '<span class="dim">–</span>', cA = (key, k) => key ? `class="${k} clk" ${dattr(key)}` : `class="${k}"`;
+  const head = `<thead><tr><th>Cliente</th><th class="n">Contrato no mês</th><th class="n">${closed ? 'Previsto' : 'Previsto até hoje'}</th><th class="n">Saiu</th><th class="n">Saldo</th><th>Andamento do mês</th><th class="n">A postar</th><th class="n">Sem previsão</th><th>Situação</th></tr></thead>`;
+  const body = rows.map((r) => {
     const sub = [r.x.plan ? 'Plano ' + esc(r.x.plan) : '', r.x.managers?.length ? 'Gestor: ' + esc(r.x.managers.join(', ')) : ''].filter(Boolean).join(' · ');
     const nm = `<a href="${esc(safeUrl(r.x.url))}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;font-weight:550">${esc(r.n)}</a>${sub ? `<div class="role">${sub}</div>` : ''}`;
-    const kp = r.pub ? drill(`Publicados em ${mes} · ${r.n}`, 'Posts do mês (stories à parte)', 'pub', r.pubL, { dateLabel: 'data da publicação' }) : null, kt = r.todo ? drill(`A postar em ${mes} · ${r.n}`, 'Agendados ou prontos com data prevista neste mês', 'pub', r.todoL, { date: (p) => p.plannedMs, dateLabel: 'data prevista', asc: true }) : null;
-    if (!r.N) return `<tr><td>${nm}</td><td ${cellA(kp)}><b>${r.pub}</b> <span class="dim">/ –</span></td><td class="dim">Plano de conteúdo sem “Quantidade de Postagens” no CRM</td><td ${cellA(kt)}>${r.todo || '<span class="dim">–</span>'}</td><td class="n"><span class="dim">–</span></td><td>${sit(r)}</td></tr>`;
-    return `<tr><td>${nm}</td><td ${cellA(kp)}><b>${r.pub}</b> <span class="dim">/ ${r.N}</span></td><td style="width:24%">${bar(r)}<div class="role" style="margin-top:6px">${closed ? 'contrato do mês' : 'esperado hoje ≈ ' + Math.round(r.E)}</div></td><td ${cellA(kt)}>${r.todo || '<span class="dim">–</span>'}</td><td class="n">${r.free ? `<span style="color:${day >= 22 ? 'var(--warn)' : 'var(--ink)'}">${r.free}</span>` : '<span class="dim">–</span>'}</td><td>${sit(r)}</td></tr>`;
-  }).join('')}</tbody></table><div class="pad note" style="padding-top:10px">Conta posts publicados dentro do mês (stories ficam à parte). “A postar” = agendado ou pronto com data prevista neste mês. “Sem previsão” = o que falta do contrato e ainda não tem data. Clientes de tráfego (Comando) não têm quantidade e ficam de fora.</div>`;
+    const kp = r.pub ? drill(`Saiu em ${mes} · ${r.n}`, 'Posts publicados no mês (stories à parte)', 'pub', r.pubL, { dateLabel: 'data da publicação' }) : null, kt = r.todo ? drill(`A postar em ${mes} · ${r.n}`, 'Agendados ou prontos com data prevista neste mês', 'pub', r.todoL, { date: (p) => p.plannedMs, dateLabel: 'data prevista', asc: true }) : null;
+    if (!r.N) return `<tr><td>${nm}</td><td class="big m">${dash}</td><td class="big m">${dash}</td><td ${cA(kp, 'big')}>${r.pub}</td><td class="sd zero">${dash}</td><td class="dim" title="Plano de conteúdo sem “Quantidade de Postagens” no CRM">Sem quantidade no CRM</td><td ${cA(kt, 'n')}>${r.todo || dash}</td><td class="n">${dash}</td><td>${sit(r)}</td></tr>`;
+    const e = exp(r), d = r.pub - e;
+    return `<tr><td>${nm}</td><td class="big m">${r.N}</td><td class="big m" title="${fmt1(r.E)} de ${r.N} (dia ${day} de ${dim})">${e}</td><td ${cA(kp, 'big')}>${r.pub}</td><td class="sd ${sdc(d)}">${sd(d)}</td><td>${bar(r)}</td><td ${cA(kt, 'n')}>${r.todo || dash}</td><td class="n">${r.free ? `<span style="color:${day >= 22 && !closed ? 'var(--warn)' : 'var(--ink)'}">${r.free}</span>` : dash}</td><td>${sit(r)}</td></tr>`;
+  }).join('');
+  const tot = `<tr class="tot"><td>Total <span class="dim" style="font-weight:500">· ${withN.length} clientes</span></td><td class="big m">${totN}</td><td class="big m">${totE}</td><td class="big">${totP}</td><td class="sd ${sdc(totS)}">${sd(totS)}</td><td>${totN ? `<div class="cbar" title="${totP} de ${totN} (${Math.round(100 * totP / totN)}%)"><span style="width:${Math.min(100, 100 * totP / totN)}%;background:${C3}"></span><i style="left:${Math.min(100, 100 * totE / totN)}%"></i></div>` : ''}</td><td class="n">${totT || dash}</td><td class="n">${totF || dash}</td><td></td></tr>`;
+  $('#contractTbl').innerHTML = `<table>${head}<tbody>${body}${totN ? tot : ''}</tbody></table><div class="pad note" style="padding-top:10px"><b>Previsto até hoje</b> = contrato × dias passados ÷ dias do mês (arredondado). <b>Saldo</b> = saiu − previsto: negativo é atraso, positivo é adiantado. Um post de diferença ainda conta como “em dia”. Conta só posts publicados dentro do mês (stories ficam à parte). <b>A postar</b> = agendado ou pronto com data neste mês; <b>Sem previsão</b> = o que falta do contrato e ainda não tem data. Clientes de tráfego (Comando) não têm quantidade e ficam de fora.</div>`;
 }
 /* ---------- faixa de atenção (topo da visão geral) ---------- */
 const ATTN = [
@@ -1093,6 +1202,7 @@ const ATTN = [
 function renderAttn(items) {
   const el = $('#attn');
   const picks = ATTN.map(([t, label]) => { const i = items.find((x) => x.title === t && x.n); return i && { i, label }; }).filter(Boolean);
+  picks.sort((a, b) => (b.i.sev === 'bad') - (a.i.sev === 'bad')); picks.length = Math.min(picks.length, 4);
   const all = items.filter((x) => x.sev !== 'ok').length;
   const more = all ? `<a class="all" href="#atencao">${all === 1 ? 'Ver o alerta' : 'Ver os ' + all + ' alertas'}</a>` : '';
   if (!picks.length) { el.className = 'attn calm'; el.innerHTML = '<span>Nada urgente agora.</span>' + more; return; }
@@ -1175,7 +1285,7 @@ function renderPulse(c) {
 function pubOverdue(c) { return c.pubsAll.filter((p) => p.stage !== 'publicado' && p.plannedMs && p.plannedMs < dayOf(c.now) && p.plannedMs > c.now - 60 * D).sort((a, b) => a.plannedMs - b.plannedMs); }
 function renderPubs(c, ws) {
   const has = Array.isArray(RAW.publications);
-  const ids = ['pubFeed','pubClient','pubFormat','nextPubs','pubWeek','pubWeek-t','contractTbl','contractSub','lgContract'];
+  const ids = ['pubFeed','pubClient','pubFormat','nextPubs','pubWeek','pubWeek-t','contractTbl','contractSum','contractSub','lgContract'];
   if (!has) { $('#pubKpis').innerHTML = '<div class="pad note">Estes dados ainda não trazem publicações. Rode o extrator (ou o servidor) atualizado.</div>'; ids.forEach((i) => { $('#' + i).innerHTML = ''; }); return; }
   const t0 = dayOf(c.now);
   const withPlan = c.published.filter((p) => p.plannedMs), onTime = withPlan.filter((p) => lateDays(p) <= 0);
@@ -1389,6 +1499,12 @@ function paintStatus() {
 }
 function setData(data) {
   for (const k of ['production', 'captacoes', 'stories']) if (!Array.isArray(data[k])) data[k] = [];
+  // Produção = só tarefas das listas Design e Edição de Vídeo (o tipo vem da lista). Aprovada = está AGORA no status "aprovado".
+  // Vale também para data.json antigo, que misturava a lista Agendamentos & Publicações.
+  data.production = data.production.filter((p) => p.list === 'Design' || p.list === 'Edição de Vídeo').map((p) => {
+    const apr = /^aprovado$/i.test(String(p.status || '').trim());
+    return { ...p, kind: p.list === 'Design' ? 'Design' : 'Vídeo', approved: apr, approvedMs: apr ? p.approvedMs ?? null : null, approvedFrom: apr ? p.approvedFrom ?? null : null };
+  });
   RAW = data;
   const cls = [...new Set([...(data.clients || []).filter((x) => x.statusType !== 'closed').map((x) => x.name), ...data.production.map((p) => p.client), ...(data.publications || []).map((p) => p.client)])].sort((a, b) => (a === 'Sem cliente') - (b === 'Sem cliente') || a.localeCompare(b, 'pt-BR'));
   if (state.client && !cls.includes(state.client)) state.client = '';   // o cliente filtrado sumiu dos dados novos
@@ -1451,6 +1567,103 @@ document.addEventListener('mousemove', (e) => {
   tip.style.left = Math.min(e.clientX + 14, innerWidth - w - 8) + 'px';
   tip.style.top = Math.min(e.clientY + 14, innerHeight - h - 8) + 'px';
 });
+
+
+/* ====================== stories ====================== */
+const storyChip = (x) => { const k = storyState(x, Date.now()); return k === 'ok' ? '<span class="tag ok">postado</span>' : k === 'miss' ? '<span class="tag bad">não postado</span>' : k === 'today' ? '<span class="tag warn">hoje, falta postar</span>' : '<span class="tag">agendado</span>'; };
+const nextDay = (ms) => { const d = new Date(ms); d.setDate(d.getDate() + 1); d.setHours(0, 0, 0, 0); return d.getTime(); };
+const WD = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'];
+function renderStories(c) {
+  const ids = ['stKpis', 'stGrid', 'stGridSub', 'stWeeks', 'stWeekSub', 'stMiss', 'stWho', 'stRule'];
+  if (!Array.isArray(RAW.stories) || !RAW.stories.length) { $('#stKpis').innerHTML = '<div class="pad note">Estes dados ainda não trazem stories. Confira a lista de Stories (STORY_LIST) no extrator.</div>'; ids.slice(1).forEach((i) => { $('#' + i).innerHTML = ''; }); return; }
+  const now = c.now, today = dayOf(now);
+  const dStart = dayOf(c.start), dEnd = Math.min(dayOf(c.end - 1), today);
+  const days = []; for (let t = dStart; t <= dEnd; t = nextDay(t)) days.push(t);
+  const inP = (s) => (!state.client || s.client === state.client) && dayOf(s.dateMs) >= dStart && dayOf(s.dateMs) <= dEnd;
+  const all = RAW.stories.filter(inP);
+  const prevAll = c.covered ? RAW.stories.filter((s) => (!state.client || s.client === state.client) && s.dateMs >= dayOf(c.start - (c.end - c.start)) && s.dateMs < dStart) : [];
+  const rate = (a) => { const ok = a.filter(isPosted).length, miss = a.filter((s) => storyState(s, now) === 'miss').length; return ok + miss ? Math.round(100 * ok / (ok + miss)) : null; };
+  const worst = (a, b) => ({ miss: 3, today: 2, ok: 1, next: 0 }[b] > { miss: 3, today: 2, ok: 1, next: 0 }[a] ? b : a);
+  // cliente x dia
+  const byC = new Map();
+  for (const s of all) {
+    const o = byC.get(s.client) || { name: s.client, cells: new Map(), items: [] };
+    o.items.push(s); const k = dayOf(s.dateMs), cur = o.cells.get(k) || { st: null, items: [] };
+    const st = storyState(s, now); cur.st = cur.st ? (cur.st === 'ok' || st === 'ok' ? 'ok' : worst(cur.st, st)) : st; cur.items.push(s); o.cells.set(k, cur); byC.set(s.client, o);
+  }
+  const rows = [...byC.values()].map((o) => {
+    const due = [...o.cells.entries()].filter(([, v]) => v.st === 'ok' || v.st === 'miss').sort((a, b) => a[0] - b[0]);
+    const ok = due.filter(([, v]) => v.st === 'ok').length, miss = due.length - ok;
+    let streak = 0; for (let i = due.length - 1; i >= 0 && due[i][1].st === 'ok'; i--) streak++;
+    const lastOk = [...due].reverse().find(([, v]) => v.st === 'ok');
+    const lastMiss = [...due].reverse().find(([, v]) => v.st === 'miss');
+    return { ...o, ok, miss, rate: due.length ? Math.round(100 * ok / due.length) : null, streak, since: lastOk ? Math.round((today - lastOk[0]) / D) : null, lastMiss: lastMiss ? lastMiss[0] : null, today: o.cells.get(today) };
+  }).sort((a, b) => (a.rate ?? 101) - (b.rate ?? 101) || b.miss - a.miss || a.name.localeCompare(b.name, 'pt-BR'));
+  const cur = rate(all), prev = rate(prevAll);
+  const okN = all.filter(isPosted).length, missL = all.filter((s) => storyState(s, now) === 'miss');
+  const hoje = all.filter((s) => dayOf(s.dateMs) === today), hojeOk = hoje.filter(isPosted).length;
+  const sevenAgo = today - 6 * D;
+  const emDia = rows.filter((r) => r.rate !== null && ![...r.cells.entries()].some(([k, v]) => k >= sevenAgo && v.st === 'miss'));
+  const seca = rows.filter((r) => r.since !== null).sort((a, b) => b.since - a.since)[0];
+  const sD = (title, sub, items, o) => drill(title, sub, 'story', items, { dateLabel: 'data do story', ...o });
+  const kAll = sD('Stories do período', perTxt(), all.filter(storyDue.bind(null)).length ? all.filter((s) => storyDue(s, now)) : all);
+  const kMiss = sD('Stories não postados', 'O dia passou e o story não saiu · ' + perTxt(), missL);
+  const kHoje = sD('Stories de hoje', 'Quem já postou e quem ainda falta', hoje);
+  $('#stKpis').innerHTML = [
+    { dr: kAll, l: 'Taxa de postagem', v: cur === null ? '—' : cur + '<span class="u">%</span>', f: (cur !== null && prev !== null ? `<span class="chip ${cur > prev ? 'up' : cur < prev ? 'down' : 'flat'}">${cur === prev ? '= estável' : (cur > prev ? '▲ ' : '▼ ') + Math.abs(cur - prev) + ' p.p.'}</span>` : '') + `<span>${okN} de ${okN + missL.length} no prazo</span>` },
+    { dr: kMiss, l: 'Não postados', v: fmt(missL.length), f: `<span>${missL.length ? new Set(missL.map((s) => s.client)).size + (new Set(missL.map((s) => s.client)).size === 1 ? ' cliente' : ' clientes') : 'nenhum no período'}</span>` },
+    { dr: hoje.length ? kHoje : null, l: 'Hoje', v: hoje.length ? `${hojeOk}<span class="u"> de ${hoje.length}</span>` : '—', f: `<span>${hoje.length ? (hojeOk === hoje.length ? 'todos postados' : hoje.length - hojeOk + ' ainda falta' + (hoje.length - hojeOk > 1 ? 'm' : '') + ' postar') : 'sem story para hoje'}</span>` },
+    { l: 'Clientes em dia', v: `${emDia.length}<span class="u"> de ${rows.length}</span>`, f: '<span>sem falha nos últimos 7 dias</span>' },
+    { l: 'Maior sequência', v: rows.length ? Math.max(...rows.map((r) => r.streak)) + '<span class="u"> d</span>' : '—', f: `<span>${rows.length ? esc(rows.slice().sort((a, b) => b.streak - a.streak)[0].name) : ''}</span>` },
+    { l: 'Mais tempo sem story', v: seca ? seca.since + '<span class="u"> d</span>' : '—', f: `<span>${seca ? (seca.since === 0 ? 'todos postaram hoje' : esc(seca.name)) : 'sem dados'}</span>` },
+  ].map(kpiHTML).join('');
+
+  // grade
+  const N = days.length, dense = N > 45, pend = all.filter((s) => storyState(s, now) === 'today').length;
+  $('#stGridSub').textContent = `${rows.length} cliente${rows.length === 1 ? '' : 's'} · ${N} dia${N === 1 ? '' : 's'} · do pior para o melhor${pend ? ' · ' + pend + ' de hoje ainda em aberto' : ''}`;
+  const hdr = days.map((t) => { const d = new Date(t), w = d.getDay(), first = d.getDate() === 1, lab = N <= 31 ? d.getDate() : (w === 1 || first ? (first ? d.toLocaleDateString('pt-BR', { month: 'short' }).replace('.', '') : d.getDate()) : ''); return `<span class="sh-d${w === 0 || w === 6 ? ' we' : ''}${t === today ? ' now' : ''}">${lab}</span>`; }).join('');
+  const WEEK = (t) => { const w = new Date(t).getDay(); return w === 0 || w === 6; };
+  let g = `<div class="sg-h"><span></span><div class="sg-cells" style="--n:${N}">${hdr}</div><span class="sg-r">taxa</span><span class="sg-r">sequência</span></div>`;
+  g += rows.map((r) => {
+    const dc = dattr(sD(r.name + ' · stories', 'Todos os stories do período', r.items));
+    const cells = days.map((t) => {
+      const v = r.cells.get(t), st = v ? v.st : WEEK(t) ? 'we' : 'none';
+      const lbl = `${r.name} · ${WD[new Date(t).getDay()]} ${dDate(t)}`;
+      const tip = `<b>${esc(lbl)}</b><br>${v ? (st === 'ok' ? 'Postado' : st === 'miss' ? 'Não postado' : st === 'today' ? 'Hoje, ainda dá tempo' : 'Agendado') : st === 'we' ? 'Fim de semana' : 'Sem story neste dia'}${v && v.items[0].assignees && v.items[0].assignees.length ? '<br>' + esc(v.items[0].assignees.join(', ')) : ''}`;
+      const key = v ? dattr(sD(lbl, 'Stories deste dia', v.items)) : '';
+      return `<i class="sc ${st}${t === today ? ' now' : ''}" data-tip="${esc(tip)}" ${key}></i>`;
+    }).join('');
+    const rc = r.rate === null ? '' : r.rate >= 90 ? 'good' : r.rate >= 75 ? 'mid' : 'low';
+    return `<div class="sg-row"><button class="sg-n" ${dc} title="${esc(r.name)}">${esc(r.name)}</button><div class="sg-cells${dense ? ' dense' : ''}" style="--n:${N}">${cells}</div><span class="sg-r rate ${rc}">${r.rate === null ? '–' : r.rate + '%'}</span><span class="sg-r">${r.streak ? r.streak + ' d' : '<em>–</em>'}</span></div>`;
+  }).join('');
+  $('#stGrid').innerHTML = rows.length ? g : '<div class="pad note">Nenhum story neste período.</div>';
+
+  // semanas
+  const weeks = weeksBetween(dStart, dEnd).map((w) => { const a = all.filter((s) => dayOf(s.dateMs) >= w && dayOf(s.dateMs) < w + 7 * D); return { w, a, r: rate(a), ok: a.filter(isPosted).length, miss: a.filter((s) => storyState(s, now) === 'miss').length }; });
+  const withR = weeks.filter((x) => x.r !== null);
+  if (withR.length) weeks.splice(0, weeks.length, ...withR);
+  $('#stWeekSub').textContent = withR.length ? `Taxa de postagem por semana (segunda a domingo) · média ${Math.round(withR.reduce((s, x) => s + x.r, 0) / withR.length)}%` : '';
+  $('#stWeeks').innerHTML = weeks.length ? weeks.map((x) => {
+    const cls = x.r === null ? 'none' : x.r >= 90 ? 'good' : x.r >= 75 ? 'mid' : 'low', h = x.r === null ? 4 : Math.max(6, x.r);
+    const k = x.a.length ? dattr(sD('Semana de ' + dDate(x.w), 'Stories da semana', x.a)) : '';
+    const tip = `<b>Semana de ${dDate(x.w)}</b><br>${x.r === null ? 'Sem story vencido' : x.ok + ' postados · ' + x.miss + ' não postados'}`;
+    return `<div class="swk-c ${cls}" ${k} data-tip="${esc(tip)}"><b>${x.r === null ? '–' : x.r + '%'}</b><div class="swk-b"><span style="height:${h}%"></span></div><small>${dDate(x.w)}</small></div>`;
+  }).join('') : '<div class="note">Sem semanas para mostrar.</div>';
+
+  // falhas recentes
+  const miss = [...missL].sort((a, b) => b.dateMs - a.dateMs);
+  $('#stMiss').innerHTML = miss.length ? miss.slice(0, 6).map((s) => `<div class="mrow"><span class="md">${dDate(s.dateMs)}<small>${WD[new Date(s.dateMs).getDay()]}</small></span><div><b>${esc(s.client)}</b><small>${esc((s.assignees || []).join(', ') || 'sem responsável')}</small></div></div>`).join('') + (miss.length > 6 ? `<div class="more2"><button class="linkbtn" ${dattr(kMiss)}>Ver as ${miss.length} falhas</button></div>` : '') : '<div class="empty">Nenhuma falha no período</div>';
+
+  // responsáveis
+  const wm = new Map();
+  for (const s of all.filter((x) => storyDue(x, now))) for (const n of ((s.assignees || []).length ? s.assignees : ['Sem responsável'])) { const o = wm.get(n) || { n, a: [] }; o.a.push(s); wm.set(n, o); }
+  const wr = [...wm.values()].map((o) => ({ ...o, ok: o.a.filter(isPosted).length, r: rate(o.a) })).sort((a, b) => b.a.length - a.a.length);
+  $('#stWho').innerHTML = wr.length ? `<table><thead><tr><th>Responsável</th><th class="n">Stories</th><th class="n">Postados</th><th class="n">Não postados</th><th>Taxa</th></tr></thead><tbody>${wr.map((o) => {
+    const bad = o.a.filter((s) => storyState(s, now) === 'miss');
+    return `<tr><td><b>${esc(o.n)}</b></td><td ${cellA(sD(o.n + ' · stories', perTxt(), o.a))}>${o.a.length}</td><td class="n">${o.ok}</td>${bad.length ? `<td ${cellA(sD(o.n + ' · não postados', perTxt(), bad))}>${bad.length}</td>` : '<td class="n dim">–</td>'}<td><div class="rbar"><span class="${o.r >= 90 ? 'good' : o.r >= 75 ? 'mid' : 'low'}" style="width:${o.r ?? 0}%"></span></div><em class="rnum">${o.r === null ? '–' : o.r + '%'}</em></td></tr>`;
+  }).join('')}</tbody></table>` : '<div class="pad note">Sem stories para mostrar.</div>';
+  $('#stRule').innerHTML = '<b>Como ler.</b> Cada tarefa da lista de Stories é um story do dia; “postado” (ou tarefa concluída) conta como feito. Um dia só vira falha depois que passa: o story de hoje fica em aberto e não derruba a taxa. A taxa é postados ÷ (postados + não postados). Sequência = dias seguidos postando, contando de hoje para trás. Dias sem tarefa na lista aparecem cinza e não entram na conta.';
+}
 
 /* ====================== páginas (landing pages e sites) ====================== */
 const PSTAGE = { fila: 'Na fila', briefing: 'Briefing', dev: 'Em desenvolvimento', revisao: 'Revisão interna', cliente: 'Aguardando cliente', ajustes: 'Alterações e ajustes', outro: 'Outra etapa', ativo: 'No ar', concluido: 'Concluída', pausado: 'Pausada' };
@@ -1547,7 +1760,7 @@ function renderPages(c) {
 }
 
 /* ====================== páginas (rota pelo # da URL) ====================== */
-const VIEWS = { visao: 'Visão geral da equipe', publicacoes: 'Publicações', paginas: 'Páginas', equipe: 'Equipe de produção', clientes: 'Clientes', capt: 'Captações', atencao: 'Atenção' };
+const VIEWS = { visao: 'Visão geral da equipe', publicacoes: 'Publicações', stories: 'Stories', paginas: 'Páginas', equipe: 'Equipe de produção', clientes: 'Clientes', capt: 'Captações', atencao: 'Atenção' };
 // A página atual vive numa variável: em visualizadores que rodam o arquivo dentro de um quadro isolado (prévia do
 // app, e-mail), trocar o # da URL pode não funcionar. O # continua sendo atualizado quando o navegador deixa.
 let curView = 'visao';
